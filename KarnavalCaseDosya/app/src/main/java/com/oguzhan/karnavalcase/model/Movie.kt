@@ -2,6 +2,9 @@ package com.oguzhan.karnavalcase.model
 
 import com.google.gson.annotations.SerializedName
 
+/*
+
+
 data class Movie(
     val adult: Boolean,
     @SerializedName("backdrop_path")
@@ -25,4 +28,16 @@ data class Movie(
     val voteAverage: Double,
     @SerializedName("vote_count")
     val voteCount: Long,
+)
+ */
+data class Movie(
+
+    val id: Long,
+    val title: String,
+    @SerializedName("backdrop_path")
+    val backdropPath: String,
+    val overview: String,
+    @SerializedName("vote_count")
+    val voteCount: Long,
+
 )

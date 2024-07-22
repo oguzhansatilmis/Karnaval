@@ -7,7 +7,20 @@
 
     <fragment
         android:id="@+id/movieFragment"
-        android:name="com.oguzhan.karnavalcase.presentation.MovieFragment"
+        android:name="com.oguzhan.karnavalcase.presentation.movie.MovieFragment"
         android:label="fragment_movie"
-        tools:layout="@layout/fragment_movie" />
+        tools:layout="@layout/fragment_movie" >
+        <action
+            android:id="@+id/action_movieFragment_to_movieDetailFragment"
+            app:destination="@id/movieDetailFragment" />
+    </fragment>
+    <fragment
+        android:id="@+id/movieDetailFragment"
+        android:name="com.oguzhan.karnavalcase.presentation.detail.MovieDetailFragment"
+        android:label="fragment_movie_detail"
+        tools:layout="@layout/fragment_movie_detail" >
+        <argument
+            android:name="movieId"
+            app:argType="long" />
+    </fragment>
 </navigation>

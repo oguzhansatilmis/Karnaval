@@ -11,7 +11,7 @@ class Repository @Inject constructor(
     suspend fun getMovie() = safeApiCall {
         apiService.getMovies("popular",1)
     }
-    suspend fun getMoviesById() = safeApiCall {
-        apiService.getMovieById()
+    suspend fun getMoviesById(movieId:Long) = safeApiCall {
+        apiService.getMovieById(movieId)
     }
 }

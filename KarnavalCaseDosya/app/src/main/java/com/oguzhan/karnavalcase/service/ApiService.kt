@@ -2,6 +2,7 @@ package com.oguzhan.karnavalcase.service
 
 import com.oguzhan.karnavalcase.model.Movie
 import com.oguzhan.karnavalcase.model.MovieResponse
+import com.oguzhan.karnavalcase.util.Constants
 import retrofit2.Response
 import retrofit2.http.GET
 import retrofit2.http.Path
@@ -14,16 +15,15 @@ interface ApiService {
     suspend fun getMovies(
         @Path("category") category : String,
         @Query("page") page : Int,
-        @Query("api_key") apiKey : String = "9396f10ab6b6234b67c4ed3a9752666d"
+        @Query("api_key") apiKey : String = Constants.API_KEY
     ) : Response<MovieResponse>
 
 
 
     @GET("/3/movie/{id}")
     suspend fun getMovieById(
-        @Path("id") id : Int = 1159518,
-        @Query("api_key") apiKey : String = "9396f10ab6b6234b67c4ed3a9752666d",
-      //  @Query("append_to_response") appendToVideos: String = "videos"
+        @Path("id") id : Long ,
+        @Query("api_key") apiKey : String = Constants.API_KEY,
     ) : Response<Movie>
 
 
