@@ -1,18 +1,55 @@
 <?xml version="1.0" encoding="utf-8"?>
 <androidx.constraintlayout.widget.ConstraintLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
-    xmlns:app="http://schemas.android.com/apk/res-auto"
     tools:context=".presentation.detail.MovieDetailFragment">
 
 
-    <TextView
+
+    <ImageView
+        android:id="@+id/detail_movie_image"
+        app:layout_constraintTop_toTopOf="parent"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintTop_toTopOf="parent"
-        android:id="@+id/text"
-        android:text="asdasdsa"
+        android:layout_width="match_parent"
+        android:layout_height="300dp">
+
+    </ImageView>
+
+
+
+    <ImageView
+        android:id="@+id/favorite_star"
+        android:layout_width="50dp"
+        android:layout_height="50dp"
+        android:src="@drawable/favorites_selector"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toTopOf="parent">
+
+    </ImageView>
+
+
+
+    <TextView
+        android:id="@+id/detail_movie_title"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:text="Header"
+        android:textSize="24sp"
+        app:layout_constraintTop_toBottomOf="@id/detail_movie_image"
+       android:layout_marginStart="30dp"
+        app:layout_constraintStart_toStartOf="parent">
+
+    </TextView>
+
+    <TextView
+        android:id="@+id/detail_movie_overview"
+        app:layout_constraintTop_toBottomOf="@id/detail_movie_title"
+        app:layout_constraintStart_toStartOf="parent"
+        android:text="asdasdasdas"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content">
 

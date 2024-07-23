@@ -1,12 +1,17 @@
 package com.oguzhan.karnavalcase.di
 
+import android.content.Context
+import androidx.room.Room
 import com.google.gson.Gson
 import com.google.gson.GsonBuilder
+import com.oguzhan.karnavalcase.db.MovieDao
+import com.oguzhan.karnavalcase.db.MovieDatabase
 import com.oguzhan.karnavalcase.service.ApiService
 import com.oguzhan.karnavalcase.util.Constants
 import dagger.Module
 import dagger.Provides
 import dagger.hilt.InstallIn
+import dagger.hilt.android.qualifiers.ApplicationContext
 import dagger.hilt.components.SingletonComponent
 import okhttp3.OkHttpClient
 import okhttp3.logging.HttpLoggingInterceptor
@@ -55,4 +60,24 @@ object AppModule {
     @Singleton
     @Provides
     fun provideApiService(retrofit: Retrofit): ApiService = retrofit.create(ApiService::class.java)
+
+
+
+
+    @Singleton
+    @Provides
+    fun provideDatabase(@ApplicationContext context: Context): MovieDatabase =
+        Room.databaseBuilder(
+            context,
+            MovieDatabase::class.java, "movie_database"
+        ).build()
+
+    @Singleton
+    @Provides
+    fun provideDao(database: MovieDatabase): MovieDao = database.movieDao()
+
+
+
+
+
 }

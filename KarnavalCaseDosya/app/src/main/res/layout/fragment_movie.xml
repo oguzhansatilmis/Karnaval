@@ -1,15 +1,74 @@
 <?xml version="1.0" encoding="utf-8"?>
 <androidx.constraintlayout.widget.ConstraintLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
     tools:context=".presentation.movie.MovieFragment">
 
-   <androidx.recyclerview.widget.RecyclerView
-       android:id="@+id/movie_recyclerview"
+
+
+   <Button
+       android:id="@+id/buton"
+       android:text="List"
+       app:layout_constraintStart_toStartOf="parent"
+       app:layout_constraintTop_toTopOf="parent"
+       android:layout_width="wrap_content"
+       android:layout_height="wrap_content">
+
+   </Button>
+
+   <Button
+       android:id="@+id/buton2"
+       android:text="Grid"
+       app:layout_constraintTop_toTopOf="parent"
+       app:layout_constraintEnd_toEndOf="parent"
+       android:layout_width="wrap_content"
+       android:layout_height="wrap_content">
+
+   </Button>
+
+   <androidx.core.widget.NestedScrollView
+       android:id="@+id/nested_scroll_view"
+       android:layout_marginTop="300dp"
        android:layout_width="match_parent"
        android:layout_height="match_parent">
 
-   </androidx.recyclerview.widget.RecyclerView>
+      <androidx.constraintlayout.widget.ConstraintLayout
+          android:layout_width="match_parent"
+          android:layout_height="match_parent">
+
+         <androidx.recyclerview.widget.RecyclerView
+             android:id="@+id/movie_recyclerview"
+             android:layout_width="match_parent"
+             android:layout_height="match_parent"
+             app:layout_constraintBottom_toTopOf="@id/more_btn"
+             app:layout_constraintEnd_toEndOf="parent"
+             app:layout_constraintStart_toStartOf="parent"
+             app:layout_constraintTop_toTopOf="parent">
+
+         </androidx.recyclerview.widget.RecyclerView>
+
+
+         <Button
+             android:id="@+id/more_btn"
+             android:layout_width="wrap_content"
+             android:layout_height="wrap_content"
+             android:text="Load More"
+             app:layout_constraintTop_toBottomOf="@id/movie_recyclerview"
+             app:layout_constraintBottom_toBottomOf="parent"
+             app:layout_constraintEnd_toEndOf="parent"
+             app:layout_constraintStart_toStartOf="parent">
+
+         </Button>
+
+
+      </androidx.constraintlayout.widget.ConstraintLayout>
+
+
+
+   </androidx.core.widget.NestedScrollView>
+
+
 
 </androidx.constraintlayout.widget.ConstraintLayout>

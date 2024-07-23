@@ -38,5 +38,16 @@
 
     </ImageView>
 
+    <ImageView
+        android:id="@+id/favorite_movie_star"
+        app:layout_constraintTop_toTopOf="parent"
+        app:layout_constraintEnd_toEndOf="parent"
+        android:background="@drawable/star_1"
+        android:visibility="gone"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content">
+
+    </ImageView>
+
 
 </androidx.constraintlayout.widget.ConstraintLayout>

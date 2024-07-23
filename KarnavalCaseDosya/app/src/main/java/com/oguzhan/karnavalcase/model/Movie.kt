@@ -39,5 +39,6 @@ data class Movie(
     val overview: String,
     @SerializedName("vote_count")
     val voteCount: Long,
+    var isFavorite:Boolean = false
 
 )

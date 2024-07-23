@@ -38,6 +38,7 @@ abstract class BaseFragment<VB: ViewBinding,VM: ViewModel,A: Activity>(
     }
 
 
+
     fun activity():A{
         return if (activity !=null){
             activity as A
