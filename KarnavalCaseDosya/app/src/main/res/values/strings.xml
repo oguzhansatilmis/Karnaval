@@ -2,4 +2,5 @@
     <string name="app_name">KarnavalCase</string>
     <string name="hello_blank_fragment">Hello blank fragment</string>
     <string name="toolbar_contents">Contents</string>
+    <string name="toolbar_contents_detail">Contents Detail</string>
 </resources>

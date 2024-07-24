@@ -27,6 +27,7 @@ class MovieDetailViewModel @Inject constructor(
                 if (response.isSuccessful){
                     val movieBody = response.body()
                     movieBody?.let { movies->
+
                         _popularMoviesById.value = Resource.Success(movies)
                     }
                 }

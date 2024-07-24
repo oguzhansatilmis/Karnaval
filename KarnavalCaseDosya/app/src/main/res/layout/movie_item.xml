@@ -21,15 +21,16 @@
 
     <TextView
         android:id="@+id/movie_title"
-        android:layout_width="wrap_content"
+        android:layout_width="match_parent"
         android:layout_height="wrap_content"
         android:textColor="@color/white"
         android:elevation="10dp"
-        android:layout_marginStart="14dp"
+        android:textSize="14sp"
+        android:padding="4dp"
+        android:layout_marginStart="12dp"
         android:textAlignment="textStart"
         app:layout_constraintBottom_toBottomOf="@id/movie_image_banner"
         app:layout_constraintStart_toStartOf="@id/movie_image_banner"
-        app:layout_constraintEnd_toEndOf="@id/movie_image_banner"
         app:layout_constraintTop_toTopOf="@id/movie_image_banner">
 
     </TextView>

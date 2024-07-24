@@ -1,7 +1,11 @@
 package com.oguzhan.karnavalcase.presentation.movie
 
+import android.annotation.SuppressLint
+import android.app.Activity
 import android.os.Bundle
 import android.view.View
+import android.view.inputmethod.InputMethodManager
+import androidx.core.widget.NestedScrollView
 import androidx.fragment.app.viewModels
 import androidx.navigation.fragment.findNavController
 import androidx.recyclerview.widget.GridLayoutManager
@@ -33,55 +37,57 @@ class MovieFragment :
         listIconListener()
         searchEditTextListener()
         moreButtonListener()
-
-
+        scrollViewStateListener()
 
     }
 
-    private fun moreButtonListener(){
+    private fun moreButtonListener() {
         binding.moreBtn.setOnClickListener {
             page++
             viewModel.getPopularMovies(page)
         }
     }
-    private fun listIconListener(){
+
+    @SuppressLint("NotifyDataSetChanged")
+    private fun listIconListener() {
 
         binding.apply {
 
             listIcon.setOnClickListener {
 
                 if (listIcon.isSelected) {
-                    setupAdapter(TotalMovieList.totalMovieList.flatMap { it.results }.toMutableList(),"list")
-
+                    binding.nestedScrollView.scrollTo(0, 0)
+                    setupAdapter(TotalMovieList.totalMovieList.flatMap { it.results }
+                        .toMutableList(), "list")
                 } else {
-                    setupAdapter(TotalMovieList.totalMovieList.flatMap { it.results }.toMutableList(),"grid")
-
+                    binding.nestedScrollView.scrollTo(0, 0)
+                    setupAdapter(TotalMovieList.totalMovieList.flatMap { it.results }
+                        .toMutableList(), "grid")
                 }
                 listIcon.isSelected = !listIcon.isSelected
             }
         }
     }
 
-    private fun searchEditTextListener(){
+    private fun searchEditTextListener() {
         binding.searchEditText.doOnTextChanged { query ->
             if (query.isEmpty()) {
                 viewModel.getPopularMovies(page)
                 binding.moreBtn.visibility = View.VISIBLE
-            }
-            else{
+            } else {
                 binding.moreBtn.visibility = View.GONE
                 viewModel.searchMovie(query)
             }
         }
     }
+
     override fun observeEvents() {
 
-          popularMovies()
-
-          searchMovies()
+        popularMovies()
+        searchMovies()
     }
 
-    private fun searchMovies(){
+    private fun searchMovies() {
         viewModel.searchMovies.observe(viewLifecycleOwner) { movies ->
 
             when (movies) {
@@ -89,7 +95,7 @@ class MovieFragment :
                 is Resource.Success -> {
                     activity().hideProgress()
                     movies.data?.let {
-                        setupAdapter(it.results,"grid")
+                        setupAdapter(it.results, "grid")
                     }
                 }
 
@@ -104,7 +110,8 @@ class MovieFragment :
 
         }
     }
-    private fun  popularMovies(){
+
+    private fun popularMovies() {
         viewModel.getPopularMovies(page)
 
         viewModel.popularMovies.observe(viewLifecycleOwner) { movies ->
@@ -116,13 +123,16 @@ class MovieFragment :
                         addPageIfNotExists(it)
 
                         if (binding.listIcon.isSelected) {
-                            setupAdapter(TotalMovieList.totalMovieList.flatMap { it.results }.toMutableList(),"grid")
+                            setupAdapter(TotalMovieList.totalMovieList.flatMap { it.results }
+                                .toMutableList(), "grid")
                         } else {
-                            setupAdapter(TotalMovieList.totalMovieList.flatMap { it.results }.toMutableList(),"list")
+                            setupAdapter(TotalMovieList.totalMovieList.flatMap { it.results }
+                                .toMutableList(), "list")
                         }
                         binding.moreBtn.visibility = View.VISIBLE
                     }
                 }
+
                 is Resource.Loading -> {
                     activity().showProgress()
                 }
@@ -133,6 +143,7 @@ class MovieFragment :
             }
         }
     }
+
     private fun addPageIfNotExists(newPage: MovieResponse) {
         val pageExists = TotalMovieList.totalMovieList.any { it.page == newPage.page }
 
@@ -140,13 +151,19 @@ class MovieFragment :
             TotalMovieList.totalMovieList.add(newPage)
         }
     }
-    private fun setupAdapter(movieList: MutableList<Movie>,type:String ) {
 
-        movieAdapter = MovieAdapter(movieList)
+    private fun setupAdapter(movieList: MutableList<Movie>, type: String) {
+
+        movieAdapter = MovieAdapter(movieList, type)
         binding.apply {
-            when(type){
-               "grid" ->{  movieRecyclerview.layoutManager = GridLayoutManager(requireContext(), 2)}
-                "list" ->{ movieRecyclerview.layoutManager = LinearLayoutManager(requireContext()) }
+            when (type) {
+                "grid" -> {
+                    movieRecyclerview.layoutManager = GridLayoutManager(requireContext(), 2)
+                }
+
+                "list" -> {
+                    movieRecyclerview.layoutManager = LinearLayoutManager(requireContext())
+                }
             }
             movieRecyclerview.adapter = movieAdapter
         }
@@ -162,4 +179,21 @@ class MovieFragment :
             findNavController().navigate(R.id.action_movieFragment_to_movieDetailFragment, bundle)
         }
     }
+
+    private fun scrollViewStateListener() {
+        binding.nestedScrollView.setOnScrollChangeListener(NestedScrollView.OnScrollChangeListener { _, _, _, _, _ ->
+            hideKeyboard(requireActivity())
+        })
+    }
+
+    private fun hideKeyboard(activity: Activity) {
+        val inputMethodManager =
+            activity.getSystemService(Activity.INPUT_METHOD_SERVICE) as InputMethodManager
+        val currentFocus = activity.currentFocus
+        if (currentFocus != null) {
+            inputMethodManager.hideSoftInputFromWindow(currentFocus.windowToken, 0)
+        }
+    }
 }
+
+

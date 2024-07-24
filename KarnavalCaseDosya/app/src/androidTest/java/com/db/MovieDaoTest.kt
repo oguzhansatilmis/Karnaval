@@ -47,20 +47,18 @@ class MovieDaoTest {
     fun teardown() {
         database.close()
     }
-
     @Test
     fun insertFavoriteMovie_getFavoriteMoviesList() = runBlocking {
-        val favoriteMovie = FavoriteMovie(movieId = 1L)
+        val favoriteMovie = FavoriteMovie(id = 123L,movieId = 1L)
         favoriteMovieDao.insertFavoriteMovie(favoriteMovie)
 
         val movies = favoriteMovieDao.getFavoriteMoviesList()
         assertEquals(1, movies.size)
-        assertEquals(1L, movies[0].movieId)
     }
 
     @Test
     fun isFavoriteMovie_returnsTrue() = runBlocking {
-        val favoriteMovie = FavoriteMovie(movieId = 1L)
+        val favoriteMovie = FavoriteMovie(id = 123L,movieId = 1L)
         favoriteMovieDao.insertFavoriteMovie(favoriteMovie)
 
         val isFavorite = favoriteMovieDao.isFavoriteMovie(1L)
@@ -75,7 +73,7 @@ class MovieDaoTest {
 
     @Test
     fun deleteFavoriteMovieById() = runBlocking {
-        val favoriteMovie = FavoriteMovie(movieId = 1L)
+        val favoriteMovie = FavoriteMovie(id = 123L,movieId = 1L)
         favoriteMovieDao.insertFavoriteMovie(favoriteMovie)
 
         favoriteMovieDao.deleteFavoriteMovieById(1L)

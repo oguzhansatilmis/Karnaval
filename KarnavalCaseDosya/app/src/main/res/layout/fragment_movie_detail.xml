@@ -49,10 +49,11 @@
 
     <TextView
         android:id="@+id/toolbarTv"
-        android:layout_width="wrap_content"
+        android:layout_width="match_parent"
+        android:textAlignment="center"
         android:layout_height="wrap_content"
         android:layout_marginStart="10dp"
-        android:text="@string/toolbar_contents"
+        android:text="@string/toolbar_contents_detail"
         android:textColor="@color/black"
         android:textSize="20sp"
         android:textStyle="bold"
@@ -69,6 +70,7 @@
         android:id="@+id/detail_movie_image"
         android:layout_width="match_parent"
         android:layout_height="300dp"
+        android:layout_margin="10dp"
         android:scaleType="fitXY"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"
@@ -79,6 +81,8 @@
 
     <androidx.cardview.widget.CardView
         android:layout_width="match_parent"
+        android:layout_margin="10dp"
+        android:elevation="10dp"
         android:layout_height="wrap_content"
         app:layout_constraintTop_toBottomOf="@id/detail_movie_image">
 
@@ -103,10 +107,10 @@
 
             <TextView
                 android:id="@+id/detail_movie_overview"
-                android:layout_width="wrap_content"
+                android:layout_width="match_parent"
                 android:layout_height="wrap_content"
                 android:layout_marginStart="12dp"
-                android:layout_marginTop="10dp"
+                android:layout_margin="10dp"
                 android:text=""
                 android:textAlignment="textStart"
                 app:layout_constraintEnd_toEndOf="parent"
@@ -120,8 +124,8 @@
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:layout_marginStart="12dp"
-                android:layout_marginTop="24dp"
-                android:text="Vote Count :"
+                android:layout_margin="10dp"
+                android:text="Vote Count:"
                 android:textSize="16sp"
                 app:layout_constraintStart_toStartOf="parent"
                 app:layout_constraintTop_toBottomOf="@id/detail_movie_overview">

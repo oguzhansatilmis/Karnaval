@@ -26,6 +26,8 @@ class MovieDetailFragment :
     override fun initializeListeners() {
         initializeBundle()
         navigateMovieFragment()
+
+
     }
 
     override fun observeEvents() {
@@ -80,6 +82,9 @@ class MovieDetailFragment :
                         binding.apply {
                             if (it.posterPath != null) {
                                 detailMovieImage.loadUrl(it.posterPath)
+                            }
+                            else{
+                                detailMovieImage.setBackgroundResource(R.drawable.image_not_found)
                             }
                             detailMovieTitle.text = it.title
                             detailMovieOverview.text = it.overview
