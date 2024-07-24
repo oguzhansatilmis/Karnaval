@@ -8,6 +8,7 @@ import com.oguzhan.karnavalcase.model.FavoriteMovie
 import com.oguzhan.karnavalcase.model.Movie
 import com.oguzhan.karnavalcase.model.Resource
 import com.oguzhan.karnavalcase.repository.Repository
+import com.oguzhan.movielist.TotalMovieList.totalMovieList
 import dagger.hilt.android.lifecycle.HiltViewModel
 import kotlinx.coroutines.launch
 import javax.inject.Inject
@@ -37,9 +38,16 @@ class MovieDetailViewModel @Inject constructor(
             }
         }
     }
-    fun addedToFavoriteMovie(movieId:Long){
+    fun addedToFavoriteMovie(movieItemId:Long){
         viewModelScope.launch {
-            insertFavoriteMovie(movieId)
+            insertFavoriteMovie(movieItemId)
+            totalMovieList.forEach {
+                it.results.forEach { movie ->
+                    if (movie.id == movieItemId) {
+                        movie.isFavorite = true
+                    }
+                }
+            }
         }
     }
     private suspend fun insertFavoriteMovie(movieId:Long){
@@ -48,12 +56,20 @@ class MovieDetailViewModel @Inject constructor(
 
     }
 
-     suspend fun isFavoriteMovie(movieId:Long):Boolean{
-        return repository.isFavoriteMovie(movieId)
+     suspend fun isFavoriteMovie(movieItemId:Long):Boolean{
+        return repository.isFavoriteMovie(movieItemId)
     }
-     fun deleteFavoriteMovieById(movieId: Long){
+     fun deleteFavoriteMovieById(movieItemId: Long){
          viewModelScope.launch {
-             repository.deleteFavoriteMovieById(movieId)
+             repository.deleteFavoriteMovieById(movieItemId)
+
+             totalMovieList.forEach {
+                 it.results.forEach { movie ->
+                     if (movie.id == movieItemId) {
+                         movie.isFavorite = false
+                     }
+                 }
+             }
          }
 
     }

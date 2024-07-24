@@ -12,6 +12,7 @@ import com.oguzhan.karnavalcase.databinding.FragmentMovieDetailBinding
 import com.oguzhan.karnavalcase.extensions.loadUrl
 import com.oguzhan.karnavalcase.model.Resource
 import com.oguzhan.movielist.TotalMovieList
+import com.oguzhan.movielist.TotalMovieList.totalMovieList
 import dagger.hilt.android.AndroidEntryPoint
 import kotlinx.coroutines.launch
 
@@ -26,8 +27,6 @@ class MovieDetailFragment :
     override fun initializeListeners() {
         initializeBundle()
         navigateMovieFragment()
-
-
     }
 
     override fun observeEvents() {
@@ -43,28 +42,16 @@ class MovieDetailFragment :
     }
     private fun favoriteMovieListener(movieItemId:Long){
         viewModel.viewModelScope.launch {
+
             val isFavorite = viewModel.isFavoriteMovie(movieItemId)
             binding.starIcon.isSelected = isFavorite
+
             binding.starIcon.setOnClickListener {
                 if (binding.starIcon.isSelected) {
                     viewModel.deleteFavoriteMovieById(movieItemId)
-                    TotalMovieList.totalMovieList.forEach {
-                        it.results.forEach { movie ->
-                            if (movie.id == movieItemId) {
-                                movie.isFavorite = false
-                            }
-                        }
-                    }
                 } else {
                     viewModel.addedToFavoriteMovie(movieItemId)
-                    TotalMovieList.totalMovieList.forEach {
-                        it.results.forEach { movie ->
 
-                            if (movie.id == movieItemId) {
-                                movie.isFavorite = true
-                            }
-                        }
-                    }
                 }
                 binding.starIcon.isSelected = !binding.starIcon.isSelected
             }
@@ -80,12 +67,7 @@ class MovieDetailFragment :
                     activity().hideProgress()
                     movie.data?.let {
                         binding.apply {
-                            if (it.posterPath != null) {
-                                detailMovieImage.loadUrl(it.posterPath)
-                            }
-                            else{
-                                detailMovieImage.setBackgroundResource(R.drawable.image_not_found)
-                            }
+                            if (it.posterPath != null)   detailMovieImage.loadUrl(it.posterPath) else   detailMovieImage.setBackgroundResource(R.drawable.image_not_found)
                             detailMovieTitle.text = it.title
                             detailMovieOverview.text = it.overview
                             detailVoteCountText.text = it.voteCount.toString()

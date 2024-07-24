@@ -20,6 +20,7 @@ import com.oguzhan.karnavalcase.model.Movie
 import com.oguzhan.karnavalcase.model.MovieResponse
 import com.oguzhan.karnavalcase.model.Resource
 import com.oguzhan.movielist.TotalMovieList
+import com.oguzhan.movielist.TotalMovieList.totalMovieList
 import dagger.hilt.android.AndroidEntryPoint
 import kotlinx.coroutines.delay
 
@@ -95,7 +96,15 @@ class MovieFragment :
                 is Resource.Success -> {
                     activity().hideProgress()
                     movies.data?.let {
-                        setupAdapter(it.results, "grid")
+
+                        if(it.results.isNotEmpty()){
+                            setupAdapter(it.results, "grid")
+                            binding.searchMovieInfoText.visibility = View.GONE
+                        }
+                        else{
+                            binding.searchMovieInfoText.visibility = View.VISIBLE
+                            setupAdapter(emptyList<Movie>().toMutableList(), "grid")
+                        }
                     }
                 }
 
@@ -123,10 +132,9 @@ class MovieFragment :
                         addPageIfNotExists(it)
 
                         if (binding.listIcon.isSelected) {
-                            setupAdapter(TotalMovieList.totalMovieList.flatMap { it.results }
-                                .toMutableList(), "grid")
+                             setupAdapter(totalMovieList.flatMap { it.results }.toMutableList(), "grid")
                         } else {
-                            setupAdapter(TotalMovieList.totalMovieList.flatMap { it.results }
+                            setupAdapter(totalMovieList.flatMap { it.results }
                                 .toMutableList(), "list")
                         }
                         binding.moreBtn.visibility = View.VISIBLE
@@ -145,10 +153,10 @@ class MovieFragment :
     }
 
     private fun addPageIfNotExists(newPage: MovieResponse) {
-        val pageExists = TotalMovieList.totalMovieList.any { it.page == newPage.page }
+        val pageExists = totalMovieList.any { it.page == newPage.page }
 
         if (!pageExists) {
-            TotalMovieList.totalMovieList.add(newPage)
+            totalMovieList.add(newPage)
         }
     }
 

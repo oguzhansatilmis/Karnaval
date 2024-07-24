@@ -1,8 +1,8 @@
 <resources xmlns:tools="http://schemas.android.com/tools">
     <!-- Base application theme. -->
-    <style name="Base.Theme.KarnavalCase" parent="Theme.Material3.DayNight.NoActionBar">
-        <item name="colorPrimary">@color/transparent</item>
-        <!-- <item name="colorPrimary">@color/my_light_primary</item> -->
+    <style name="Base.Theme.KarnavalCase" parent="Theme.Material3.Light.NoActionBar">
+        <item name="colorPrimary">@color/black</item>
+
     </style>
 
     <style name="Theme.KarnavalCase" parent="Base.Theme.KarnavalCase" />
