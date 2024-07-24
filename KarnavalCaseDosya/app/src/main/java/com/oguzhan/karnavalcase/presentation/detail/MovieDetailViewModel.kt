@@ -23,17 +23,11 @@ class MovieDetailViewModel @Inject constructor(
     fun getPopularMovieById(movieId:Long){
         viewModelScope.launch {
             val movie = repository.getMoviesById(movieId)
-
             movie?.let { response->
-
                 if (response.isSuccessful){
-
-                    val responseBody = response.body()
-
-                    responseBody?.let { movies->
-
+                    val movieBody = response.body()
+                    movieBody?.let { movies->
                         _popularMoviesById.value = Resource.Success(movies)
-
                     }
                 }
                 else{
@@ -43,20 +37,17 @@ class MovieDetailViewModel @Inject constructor(
         }
     }
     fun addedToFavoriteMovie(movieId:Long){
-
         viewModelScope.launch {
             insertFavoriteMovie(movieId)
         }
     }
     private suspend fun insertFavoriteMovie(movieId:Long){
-
         val favoriteMovie = FavoriteMovie(movieId = movieId)
-
         repository.insertFavoriteMovie(favoriteMovie)
 
     }
 
-    suspend fun isFavoriteMovie(movieId:Long):Boolean{
+     suspend fun isFavoriteMovie(movieId:Long):Boolean{
         return repository.isFavoriteMovie(movieId)
     }
      fun deleteFavoriteMovieById(movieId: Long){

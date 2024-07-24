@@ -1,5 +1,6 @@
 package com.oguzhan.karnavalcase.service
 
+import com.oguzhan.karnavalcase.model.DisplayResponse
 import com.oguzhan.karnavalcase.model.Movie
 import com.oguzhan.karnavalcase.model.MovieResponse
 import com.oguzhan.karnavalcase.util.Constants
@@ -26,20 +27,11 @@ interface ApiService {
     ) : Response<Movie>
 
 
-
-
-
-
-    /*
         @GET("/3/search/multi")
     suspend fun getSearch(
         @Query("query") query: String,
-        @Query("api_key") apiKey : String = API_KEY
+        @Query("api_key") apiKey : String = Constants.API_KEY
     ) : Response<DisplayResponse>
-
-
-     */
-
 
 
 }

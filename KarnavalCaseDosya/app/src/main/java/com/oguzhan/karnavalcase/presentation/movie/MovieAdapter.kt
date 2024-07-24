@@ -36,8 +36,8 @@ class MovieAdapter(private val movieList: MutableList<Movie>):RecyclerView.Adapt
         val movieItem = movieList[position]
 
 
-        if (movieItem.backdropPath != null){
-            holder.binding.movieImage.loadUrl(movieItem.backdropPath)
+        if (movieItem.posterPath != null){
+            holder.binding.movieImage.loadUrl(movieItem.posterPath)
         }
 
         holder.binding.favoriteMovieStar.visibility = if (movieItem.isFavorite) View.VISIBLE  else View.GONE
@@ -50,8 +50,4 @@ class MovieAdapter(private val movieList: MutableList<Movie>):RecyclerView.Adapt
 
     }
 
-    fun updateData(newPageMovieList: MutableList<Movie>){
-        movieList.addAll(newPageMovieList)
-        notifyDataSetChanged()
-    }
 }

@@ -36,6 +36,8 @@ data class Movie(
     val title: String,
     @SerializedName("backdrop_path")
     val backdropPath: String,
+    @SerializedName("poster_path")
+    val posterPath: String,
     val overview: String,
     @SerializedName("vote_count")
     val voteCount: Long,

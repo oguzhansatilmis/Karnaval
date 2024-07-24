@@ -16,13 +16,15 @@ class Repository @Inject constructor(
     suspend fun getMovie(page:Int) = safeApiCall {
         apiService.getMovies(page)
     }
+    suspend fun getSearchMovies(query:String) = safeApiCall {
+
+        apiService.getSearch(query)
+    }
     suspend fun getMoviesById(movieId:Long) = safeApiCall {
         apiService.getMovieById(movieId)
     }
 
-
     //Database
-
     suspend fun insertFavoriteMovie(favoriteMovie: FavoriteMovie){
 
         movieDao.insertFavoriteMovie(favoriteMovie)
@@ -37,6 +39,4 @@ class Repository @Inject constructor(
     suspend fun deleteFavoriteMovieById(movieId: Long){
         movieDao.deleteFavoriteMovieById(movieId)
     }
-
-
 }

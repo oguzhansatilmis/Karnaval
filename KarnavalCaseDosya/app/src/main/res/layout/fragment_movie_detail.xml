@@ -4,57 +4,147 @@
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
+    android:background="@color/white"
     tools:context=".presentation.detail.MovieDetailFragment">
 
 
-
-    <ImageView
-        android:id="@+id/detail_movie_image"
-        app:layout_constraintTop_toTopOf="parent"
-        app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintEnd_toEndOf="parent"
-        android:layout_width="match_parent"
-        android:layout_height="300dp">
-
-    </ImageView>
-
-
-
-    <ImageView
-        android:id="@+id/favorite_star"
-        android:layout_width="50dp"
-        android:layout_height="50dp"
-        android:src="@drawable/favorites_selector"
+    <androidx.appcompat.widget.Toolbar
+        android:id="@+id/toolbar"
+        android:layout_width="0dp"
+        android:layout_height="wrap_content"
+        android:background="@color/white"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toTopOf="parent">
 
+    </androidx.appcompat.widget.Toolbar>
+
+    <ImageView
+        android:id="@+id/navigate_icon"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginStart="10dp"
+        android:background="@drawable/back"
+        android:visibility="visible"
+        app:layout_constraintBottom_toBottomOf="@id/toolbarTv"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toTopOf="@id/toolbarTv">
+
     </ImageView>
 
 
+    <ImageView
+        android:id="@+id/star_icon"
+        android:layout_width="30dp"
+        android:layout_height="30dp"
+        android:layout_marginStart="10dp"
+        android:layout_marginEnd="20dp"
+        android:src="@drawable/favorites_selector"
+        android:visibility="visible"
+        app:layout_constraintBottom_toBottomOf="@id/toolbarTv"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintTop_toTopOf="@id/toolbarTv">
+
+    </ImageView>
 
     <TextView
-        android:id="@+id/detail_movie_title"
+        android:id="@+id/toolbarTv"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:text="Header"
-        android:textSize="24sp"
-        app:layout_constraintTop_toBottomOf="@id/detail_movie_image"
-       android:layout_marginStart="30dp"
-        app:layout_constraintStart_toStartOf="parent">
-
-    </TextView>
-
-    <TextView
-        android:id="@+id/detail_movie_overview"
-        app:layout_constraintTop_toBottomOf="@id/detail_movie_title"
+        android:layout_marginStart="10dp"
+        android:text="@string/toolbar_contents"
+        android:textColor="@color/black"
+        android:textSize="20sp"
+        android:textStyle="bold"
+        app:layout_constraintBottom_toBottomOf="@id/toolbar"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toEndOf="@id/navigate_icon"
         app:layout_constraintStart_toStartOf="parent"
-        android:text="asdasdasdas"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content">
+        app:layout_constraintTop_toTopOf="@id/toolbar">
 
     </TextView>
 
+
+    <ImageView
+        android:id="@+id/detail_movie_image"
+        android:layout_width="match_parent"
+        android:layout_height="300dp"
+        android:scaleType="fitXY"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@id/toolbar">
+
+    </ImageView>
+
+
+    <androidx.cardview.widget.CardView
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        app:layout_constraintTop_toBottomOf="@id/detail_movie_image">
+
+        <androidx.constraintlayout.widget.ConstraintLayout
+            android:layout_width="match_parent"
+            android:layout_height="match_parent"
+            android:padding="8dp">
+
+
+            <TextView
+                android:id="@+id/detail_movie_title"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_marginStart="8dp"
+                android:text="Header"
+                android:textStyle="bold"
+                android:textSize="24sp"
+                app:layout_constraintStart_toStartOf="parent"
+                app:layout_constraintTop_toTopOf="parent">
+
+            </TextView>
+
+            <TextView
+                android:id="@+id/detail_movie_overview"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_marginStart="12dp"
+                android:layout_marginTop="10dp"
+                android:text=""
+                android:textAlignment="textStart"
+                app:layout_constraintEnd_toEndOf="parent"
+                app:layout_constraintStart_toStartOf="parent"
+                app:layout_constraintTop_toBottomOf="@id/detail_movie_title">
+
+            </TextView>
+
+            <TextView
+                android:id="@+id/detail_vote_count"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_marginStart="12dp"
+                android:layout_marginTop="24dp"
+                android:text="Vote Count :"
+                android:textSize="16sp"
+                app:layout_constraintStart_toStartOf="parent"
+                app:layout_constraintTop_toBottomOf="@id/detail_movie_overview">
+
+            </TextView>
+
+            <TextView
+                android:id="@+id/detail_vote_count_text"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_marginStart="6dp"
+                android:text=""
+                app:layout_constraintBottom_toBottomOf="@id/detail_vote_count"
+                app:layout_constraintStart_toEndOf="@id/detail_vote_count"
+                app:layout_constraintTop_toTopOf="@id/detail_vote_count">
+
+            </TextView>
+
+
+        </androidx.constraintlayout.widget.ConstraintLayout>
+
+
+    </androidx.cardview.widget.CardView>
 
 
 </androidx.constraintlayout.widget.ConstraintLayout>

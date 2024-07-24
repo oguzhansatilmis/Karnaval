@@ -3,36 +3,105 @@
     xmlns:app="http://schemas.android.com/apk/res-auto"
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
+    android:background="@color/white"
     android:layout_height="match_parent"
     tools:context=".presentation.movie.MovieFragment">
 
 
-
-   <Button
-       android:id="@+id/buton"
-       android:text="List"
-       app:layout_constraintStart_toStartOf="parent"
-       app:layout_constraintTop_toTopOf="parent"
-       android:layout_width="wrap_content"
-       android:layout_height="wrap_content">
-
-   </Button>
-
-   <Button
-       android:id="@+id/buton2"
-       android:text="Grid"
-       app:layout_constraintTop_toTopOf="parent"
+   <androidx.appcompat.widget.Toolbar
+       android:id="@+id/toolbar"
+       android:layout_width="0dp"
+       android:layout_height="wrap_content"
+       android:background="@color/white"
        app:layout_constraintEnd_toEndOf="parent"
-       android:layout_width="wrap_content"
-       android:layout_height="wrap_content">
+       app:layout_constraintStart_toStartOf="parent"
+       app:layout_constraintTop_toTopOf="parent">
 
-   </Button>
+   </androidx.appcompat.widget.Toolbar>
+
+
+   <androidx.constraintlayout.widget.ConstraintLayout
+       android:id="@+id/search_view"
+       android:layout_margin="20dp"
+       app:layout_constraintStart_toStartOf="parent"
+       app:layout_constraintEnd_toEndOf="parent"
+       app:layout_constraintTop_toBottomOf="@id/toolbar"
+       android:background="@drawable/search_background"
+       android:layout_width="match_parent"
+       android:layout_height="50dp">
+
+
+      <ImageView
+          android:id="@+id/search_icon"
+          android:background="@drawable/search"
+          android:layout_marginStart="10dp"
+          android:padding="10dp"
+          app:layout_constraintEnd_toEndOf="parent"
+          app:layout_constraintTop_toTopOf="parent"
+          app:layout_constraintStart_toEndOf="@id/search_edit_text"
+          app:layout_constraintBottom_toBottomOf="parent"
+          android:layout_width="wrap_content"
+          android:layout_height="wrap_content">
+
+      </ImageView>
+
+      <EditText
+          android:id="@+id/search_edit_text"
+          android:hint="Search"
+          app:layout_constraintTop_toTopOf="parent"
+          app:layout_constraintBottom_toBottomOf="parent"
+         app:layout_constraintStart_toStartOf="parent"
+          app:layout_constraintEnd_toEndOf="parent"
+          android:layout_width="0dp"
+          android:layout_marginEnd="30dp"
+          android:layout_height="wrap_content"
+          android:background="@android:color/transparent">
+      </EditText>
+
+   </androidx.constraintlayout.widget.ConstraintLayout>
+
+
+
+
+
+   <ImageView
+       android:id="@+id/list_icon"
+       android:src="@drawable/list_selector"
+       android:layout_marginStart="10dp"
+       android:visibility="visible"
+       android:layout_marginEnd="20dp"
+       app:layout_constraintEnd_toEndOf="parent"
+       app:layout_constraintTop_toTopOf="@id/toolbarTv"
+       app:layout_constraintBottom_toBottomOf="@id/toolbarTv"
+       android:layout_width="30dp"
+       android:layout_height="30dp">
+
+   </ImageView>
+
+   <TextView
+       android:id="@+id/toolbarTv"
+       android:layout_width="wrap_content"
+       android:layout_height="wrap_content"
+       android:text="@string/toolbar_contents"
+       android:textStyle="bold"
+       android:textColor="@color/black"
+       app:layout_constraintStart_toStartOf="parent"
+       app:layout_constraintEnd_toEndOf="parent"
+       android:textSize="20sp"
+       android:layout_marginStart="10dp"
+       app:layout_constraintBottom_toBottomOf="@id/toolbar"
+       app:layout_constraintStart_toEndOf="parent"
+       app:layout_constraintTop_toTopOf="@id/toolbar">
+
+   </TextView>
+
 
    <androidx.core.widget.NestedScrollView
        android:id="@+id/nested_scroll_view"
-       android:layout_marginTop="300dp"
+       app:layout_constraintTop_toBottomOf="@id/search_view"
+       app:layout_constraintBottom_toBottomOf="parent"
        android:layout_width="match_parent"
-       android:layout_height="match_parent">
+       android:layout_height="0dp">
 
       <androidx.constraintlayout.widget.ConstraintLayout
           android:layout_width="match_parent"
@@ -42,6 +111,7 @@
              android:id="@+id/movie_recyclerview"
              android:layout_width="match_parent"
              android:layout_height="match_parent"
+             android:layout_marginTop="30dp"
              app:layout_constraintBottom_toTopOf="@id/more_btn"
              app:layout_constraintEnd_toEndOf="parent"
              app:layout_constraintStart_toStartOf="parent"
@@ -55,6 +125,11 @@
              android:layout_width="wrap_content"
              android:layout_height="wrap_content"
              android:text="Load More"
+             android:layout_margin="14dp"
+             android:visibility="gone"
+             app:backgroundTint="@null"
+             android:background="@drawable/add_more_button"
+             android:textColor="@color/white"
              app:layout_constraintTop_toBottomOf="@id/movie_recyclerview"
              app:layout_constraintBottom_toBottomOf="parent"
              app:layout_constraintEnd_toEndOf="parent"
