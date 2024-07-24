@@ -14,4 +14,4 @@ This project consists of 2 screens. Movies are listed and details of the selecte
 
   ## Some video from the application":
 
-  <img src="demo.gif" width="300" height="500" />
+  <img src="demo.gif" width="300" height="500" />   <img src="demo.gif" width="300" height="500" />     <img src="demo.gif" width="300" height="500" />
