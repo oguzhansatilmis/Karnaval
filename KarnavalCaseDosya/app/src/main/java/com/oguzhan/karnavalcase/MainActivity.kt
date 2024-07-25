@@ -15,18 +15,13 @@ import dagger.hilt.android.AndroidEntryPoint
 class MainActivity : AppCompatActivity() {
 
     private lateinit var binding: ActivityMainBinding
-
     private var isShowingDialog = false
-    private val viewType = 0
-
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
         binding = ActivityMainBinding.inflate(layoutInflater)
         setContentView(binding.root)
-
     }
-
     fun showProgress() {
         isShowingDialog = true
         binding.activityProgressbarLayout.visibility = View.VISIBLE
@@ -36,9 +31,6 @@ class MainActivity : AppCompatActivity() {
         isShowingDialog = false
         binding.activityProgressbarLayout.visibility = View.GONE
     }
-
-
-
     override fun onKeyDown(keyCode: Int, event: KeyEvent?): Boolean {
         if (keyCode == KeyEvent.KEYCODE_BACK && isShowingDialog) {
             return true

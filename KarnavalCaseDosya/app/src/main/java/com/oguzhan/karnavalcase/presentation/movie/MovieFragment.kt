@@ -57,12 +57,16 @@ class MovieFragment :
             listIcon.setOnClickListener {
 
                 if (listIcon.isSelected) {
+                    binding.searchEditText.text.clear()
+                    hideKeyboard(requireActivity())
                     binding.nestedScrollView.scrollTo(0, 0)
-                    setupAdapter(TotalMovieList.totalMovieList.flatMap { it.results }
+                    setupAdapter(totalMovieList.flatMap { it.results }
                         .toMutableList(), "list")
                 } else {
+                    binding.searchEditText.text.clear()
+                    hideKeyboard(requireActivity())
                     binding.nestedScrollView.scrollTo(0, 0)
-                    setupAdapter(TotalMovieList.totalMovieList.flatMap { it.results }
+                    setupAdapter(totalMovieList.flatMap { it.results }
                         .toMutableList(), "grid")
                 }
                 listIcon.isSelected = !listIcon.isSelected
@@ -97,11 +101,10 @@ class MovieFragment :
                     activity().hideProgress()
                     movies.data?.let {
 
-                        if(it.results.isNotEmpty()){
+                        if (it.results.isNotEmpty()) {
                             setupAdapter(it.results, "grid")
                             binding.searchMovieInfoText.visibility = View.GONE
-                        }
-                        else{
+                        } else {
                             binding.searchMovieInfoText.visibility = View.VISIBLE
                             setupAdapter(emptyList<Movie>().toMutableList(), "grid")
                         }
@@ -132,15 +135,15 @@ class MovieFragment :
                         addPageIfNotExists(it)
 
                         if (binding.listIcon.isSelected) {
-                             setupAdapter(totalMovieList.flatMap { it.results }.toMutableList(), "grid")
+                            setupAdapter(totalMovieList.flatMap { result -> result.results }
+                                .toMutableList(), "grid")
                         } else {
-                            setupAdapter(totalMovieList.flatMap { it.results }
+                            setupAdapter(totalMovieList.flatMap { result -> result.results }
                                 .toMutableList(), "list")
                         }
                         binding.moreBtn.visibility = View.VISIBLE
                     }
                 }
-
                 is Resource.Loading -> {
                     activity().showProgress()
                 }
@@ -151,7 +154,6 @@ class MovieFragment :
             }
         }
     }
-
     private fun addPageIfNotExists(newPage: MovieResponse) {
         val pageExists = totalMovieList.any { it.page == newPage.page }
 
@@ -161,7 +163,6 @@ class MovieFragment :
     }
 
     private fun setupAdapter(movieList: MutableList<Movie>, type: String) {
-
         movieAdapter = MovieAdapter(movieList, type)
         binding.apply {
             when (type) {
