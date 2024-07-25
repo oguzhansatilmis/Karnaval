@@ -8,7 +8,7 @@ You can search for movies using the search bar.
 
 # Optional
 
--Scenario tests were written for the local database.
+- Scenario tests were written for the local database.
 
 ## Used technologies:
 
