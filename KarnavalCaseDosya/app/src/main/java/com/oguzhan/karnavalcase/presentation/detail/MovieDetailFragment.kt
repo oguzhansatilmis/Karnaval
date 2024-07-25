@@ -1,5 +1,6 @@
 package com.oguzhan.karnavalcase.presentation.detail
 
+import android.os.Bundle
 import androidx.fragment.app.viewModels
 import androidx.lifecycle.viewModelScope
 import androidx.navigation.fragment.NavHostFragment
@@ -22,7 +23,7 @@ class MovieDetailFragment :
         FragmentMovieDetailBinding::inflate
     ) {
     override val viewModel: MovieDetailViewModel by viewModels()
-
+    private var isGrid :Boolean?  = null
 
     override fun initializeListeners() {
         initializeBundle()
@@ -35,6 +36,7 @@ class MovieDetailFragment :
     private fun initializeBundle(){
         val bundle = arguments
         val  movieItemId = bundle?.getLong("movieId")
+        isGrid = bundle?.getBoolean("isGrid")
         movieItemId?.let {
             viewModel.getPopularMovieById(it)
             favoriteMovieListener(it)
@@ -87,7 +89,16 @@ class MovieDetailFragment :
     }
     private fun navigateMovieFragment() {
         binding.navigateIcon.setOnClickListener {
-            findNavController().navigate(R.id.action_movieDetailFragment_to_movieFragment)
+
+            val bundle = Bundle()
+            bundle.apply {
+                isGrid?.let {
+                    putBoolean("isGrid",it)
+                }
+
+            }
+
+            findNavController().navigate(R.id.action_movieDetailFragment_to_movieFragment,bundle)
         }
     }
 }

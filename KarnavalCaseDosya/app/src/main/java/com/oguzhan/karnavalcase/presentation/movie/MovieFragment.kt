@@ -39,8 +39,10 @@ class MovieFragment :
         searchEditTextListener()
         moreButtonListener()
         scrollViewStateListener()
-
+        listIconListener()
+        listIconStateListener()
     }
+
 
     private fun moreButtonListener() {
         binding.moreBtn.setOnClickListener {
@@ -84,6 +86,17 @@ class MovieFragment :
                 viewModel.searchMovie(query)
             }
         }
+    }
+
+
+    private fun  listIconStateListener(){
+        val bundle = arguments
+        val isGrid = bundle?.getBoolean("isGrid")
+
+        isGrid?.let {
+            binding.listIcon.isSelected = it
+        }
+
     }
 
     override fun observeEvents() {
@@ -184,6 +197,7 @@ class MovieFragment :
             val bundle = Bundle()
             bundle.apply {
                 putLong("movieId", movieId)
+                putBoolean("isGrid",binding.listIcon.isSelected)
             }
             findNavController().navigate(R.id.action_movieFragment_to_movieDetailFragment, bundle)
         }
