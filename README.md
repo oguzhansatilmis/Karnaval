@@ -6,7 +6,7 @@ In the MovieFragment, a list of movies is displayed. If the user has previously 
 When you click on a movie, you are directed to the MovieDetailFragment, where you can access information about the movie.
 You can search for movies using the search bar.
 
-#Optional
+# Optional
 
 -Scenario tests were written for the local database.
 
